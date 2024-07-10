@@ -14,6 +14,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.NonInvertibleTransformException;
 
+import java.util.Optional;
+
 
 public class MainView extends HBox {
     private final int v1 = 500;
@@ -47,7 +49,7 @@ public class MainView extends HBox {
         draw(gc3,Color.LIGHTBLUE, affine1);
         draw(gc2, Color.WHITESMOKE, affine2);
 
-        actionGrid.setOnMousePressed( e -> { this.drawOnClick(e, gc1);});
+        actionGrid.setOnMousePressed( e -> { this.drawOnClick(e, gc1, simulation);});
 
         Pane grids = new Pane();
         grids.getChildren().addAll(mainGrid,actionGrid);
@@ -74,15 +76,18 @@ public class MainView extends HBox {
             context.strokeLine(0,j,10,j);
         }
     }
-    private void drawOnClick(MouseEvent event, GraphicsContext context){
+    private void drawOnClick(MouseEvent event, GraphicsContext context, Simulation sim){
 
         try {
             Point2D coords = this.affine1.inverseTransform(event.getX(), event.getY());
             int simX = (int) coords.getX();
             int simY = (int) coords.getY();
-            context.setFill(Color.RED);
-            context.fillRect(simX*v1/10f,simY*v1/10f, v1/10f, v1/10f);
-            System.out.println(simX + " " +simY);
+
+            Optional<Color> opt = sim.addShot(simX,simY);
+            if(opt.isPresent()) {
+                context.setFill(opt.get());
+                context.fillRect((simX * v1 / 10f) + 1.0f, (simY * v1 / 10f) + 1.0f, (v1 / 10f) - 2.0f, (v1 / 10f) - 2.0f);
+            }
         }catch (NonInvertibleTransformException e){
             e.printStackTrace();
         }
