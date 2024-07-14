@@ -10,9 +10,16 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
         MainView mainView = new MainView();
-        Scene scene = new Scene(mainView, 800, 500);
+        Scene scene3 = new Scene(mainView, 800, 500);
+
+        SettingScene settingScene = new SettingScene(stage,scene3);
+        Scene scene2 = new Scene(settingScene);
+
+        StartScene startScene = new StartScene(stage,scene2);
+        Scene scene1 = new Scene(startScene,800,500);
+
         stage.setTitle("Battleship Game");
-        stage.setScene(scene);
+        stage.setScene(scene1);
         stage.show();
     }
 
