@@ -13,11 +13,11 @@ public class Ship extends Pane {
     private Affine affine;
 
     public Ship(String name,  int number) {
-        canvas = new Canvas();
+        canvas = new Canvas(number * 40f, 40f);
         this.name = name;
         this.number = number;
         affine = new Affine();
-        affine.appendScale(40f,40f);
+        affine.appendScale(number * 40f,40f);
         this.drawShip(canvas.getGraphicsContext2D());
         this.getChildren().add(canvas);
     }
@@ -37,14 +37,17 @@ public class Ship extends Pane {
 
         context.setTransform(affine);
         context.setFill(Color.YELLOW);
-        context.fillRect(0, 0, 40, number * 40);
-        /*
+        context.fillRect(0, 0, 40, 40);
         context.setStroke(Color.BLACK);
         context.setLineWidth(0.05);
-        for (int i = 0; i <= 10; i++) {
-            context.strokeLine(i, 0, i, number);
+        for(int i = 0; i<=5; i++){
+            context.strokeLine(i,0,i,number);
         }
-        */
+
+        for(int j = 0; j<=5;j++){
+            context.strokeLine(0,j,number,j);
+        }
+
     }
 
 }
