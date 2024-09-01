@@ -39,6 +39,7 @@ public class SettingScene extends GridPane {
 
         GraphicsContext gc2 = mainGrid.getGraphicsContext2D();
 
+        this.draw(gc2,v1,v1);
         settingShips();
 
         Pane grids = new Pane();
@@ -46,21 +47,37 @@ public class SettingScene extends GridPane {
         mainGrid.toBack();
 
         button.setOnAction( e-> {
+            int[][] a = shipsLayout();
+            for(int i = 0; i<10; i++){
+                for(int j = 0; j<10;j++){
+                    System.out.print(a[i][j]+ " ");
+                }
+                System.out.println();
+            }
             window.setScene(scene);
             e.consume();
         });
 
-        this.draw(gc2,v1,v1);
-
         this.add(grids,1,1);
         this.add(button,0,0);
-
-
-
-
-
-
     }
+
+    private int[][] shipsLayout(){
+        int[][] array = new int[10][10];
+        ArrayList<double[]> list = new ArrayList<>();
+
+        for(Ship ship : ships){
+            int x = (int) (ship.getLayoutX()/40) - 5;
+            int y = (int) (ship.getLayoutY()/40);
+
+            for(int i = 0 ; i < ship.getNumber(); i++){
+                array[y][x+i] = 1;
+            }
+        }
+
+        return array;
+    }
+
     private void settingShips(){
         ships.add(new Ship("Carrier", 5));
         ships.add(new Ship("Battleship",4));

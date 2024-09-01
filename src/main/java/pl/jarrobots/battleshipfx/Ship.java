@@ -11,6 +11,7 @@ public class Ship extends Pane {
     private Canvas canvas;
     private int number;
     private Affine affine;
+    private int[] position;
 
     public Ship(String name,  int number) {
         canvas = new Canvas(number * 40f, 40f);

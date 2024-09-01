@@ -10,6 +10,8 @@ public class DraggableMaker {
 
 
     public void makeDraggable( Node node){
+        final int finalX;
+        final int finalY;
 
         node.setOnMousePressed(mouseEvent -> {
             pressX = (int) mouseEvent.getX()/cellSize;
@@ -20,7 +22,6 @@ public class DraggableMaker {
             int x = (int) (e.getSceneX()/cellSize) - pressX;
             int y = (int) (e.getSceneY()/cellSize) - pressY;
 
-            System.out.println(x +" " + y);
             node.setLayoutX(x*40);
             node.setLayoutY(y*40);
         });
