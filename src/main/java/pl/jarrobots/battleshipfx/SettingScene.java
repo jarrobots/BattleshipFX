@@ -4,16 +4,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+
 
 public class SettingScene extends GridPane {
     private static final int a = 40;
@@ -23,11 +22,11 @@ public class SettingScene extends GridPane {
     private static final int v2 = 400;
     private Canvas mainGrid;
 
-    private ArrayList<Ship> ships;
+    private final ArrayList<Ship> ships;
 
-    private Affine affine1;
-    private Button button = new Button("Ok");
-    public SettingScene(Stage window, Scene scene){
+    private final Affine affine1;
+
+    public SettingScene(Stage window, Connector connector){
 
         ships = new ArrayList<>();
 
@@ -46,14 +45,19 @@ public class SettingScene extends GridPane {
         grids.getChildren().addAll(mainGrid, ships.get(0), ships.get(1), ships.get(2), ships.get(3), ships.get(4));
         mainGrid.toBack();
 
-        button.setOnAction( e-> {
+        Button button = new Button("Ok");
+        button.setOnAction(e-> {
             int[][] a = shipsLayout();
-            for(int i = 0; i<10; i++){
-                for(int j = 0; j<10;j++){
-                    System.out.print(a[i][j]+ " ");
-                }
-                System.out.println();
+            try {
+                int sendValue = connector.sendInitialArray(a);
             }
+            catch (IOException exception){
+                exception.printStackTrace();
+            }
+
+            MainView mainView = new MainView();
+            Scene scene = new Scene(mainView, 800, 500);
+
             window.setScene(scene);
             e.consume();
         });
