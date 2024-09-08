@@ -14,6 +14,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Battleship Game");
         stage.setScene(scene1);
         stage.show();
+
     }
 
     public static void main(String[] args) {

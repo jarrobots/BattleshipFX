@@ -36,6 +36,7 @@ public class StartScene extends GridPane {
             SettingScene settingScene = new SettingScene(window, connector);
             Scene scene = new Scene(settingScene);
             window.setScene(scene);
+
         });
 
     }

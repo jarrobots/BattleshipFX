@@ -20,6 +20,7 @@ public class Connector {
     public Connector(String adres, String port) throws IOException {
             this.addr = InetAddress.getByName(adres);
             this.port = Integer.parseInt(port);
+
             this.socket = new Socket(this.addr,this.port);
     }
 

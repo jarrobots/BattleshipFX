@@ -98,6 +98,7 @@ public class SettingScene extends GridPane {
         DraggableMaker draggableMaker = new DraggableMaker();
         for(Ship ship : ships){
             draggableMaker.makeDraggable(ship);
+
         }
     }
 
