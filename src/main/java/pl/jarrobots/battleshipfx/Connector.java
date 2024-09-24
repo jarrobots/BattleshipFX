@@ -57,4 +57,4 @@ public class Connector {
     }
 
 }
-// Pamietac o socket close
+// Pamietac o socket close - podczas wylacenia
