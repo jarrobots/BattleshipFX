@@ -22,11 +22,16 @@ public class Connector {
             this.port = Integer.parseInt(port);
 
             this.socket = new Socket(this.addr,this.port);
+            outputStream = new DataOutputStream(socket.getOutputStream());
+            outputStream.writeInt(1);
     }
 
     public int sendInitialArray(int[][] arr) throws IOException {
-        String str = arrayToString(arr);
+        //String str = arrayToString(arr);
+        String str = "hello";
+        System.out.println(str);
         outputStream.writeChars(str);
+
         return 0;
     }
     public int send(int x, int y)  {
@@ -52,3 +57,4 @@ public class Connector {
     }
 
 }
+// Pamietac o socket close
