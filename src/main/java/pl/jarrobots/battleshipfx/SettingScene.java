@@ -52,7 +52,7 @@ public class SettingScene extends GridPane {
                 int sendValue = connector.sendInitialArray(a);
             }
             catch (IOException exception){
-                exception.printStackTrace();
+                AlertBox.display("Initialisation failed");
             }
 
             MainView mainView = new MainView();
@@ -107,7 +107,6 @@ public class SettingScene extends GridPane {
         context.setTransform(affine1);
         context.setFill(Color.WHITESMOKE);
         context.fillRect(0,0,i1,i2);
-
 
         context.setStroke(Color.BLACK);
         context.setLineWidth(0.05);
