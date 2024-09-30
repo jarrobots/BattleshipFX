@@ -28,14 +28,17 @@ public class StartScene extends GridPane {
             Connector connector = null;
             try{
                 connector = new Connector(ipTextField.getText(), portTextField.getText());
+                SettingScene settingScene = new SettingScene(window, connector);
+                Scene scene = new Scene(settingScene);
+                window.setScene(scene);
             }
             catch (IOException exception){
-                exception.printStackTrace();
+                AlertBox.display("Unable to connect");
+            }
+            catch(NumberFormatException exception){
+                AlertBox.display("Your given IP or port format is incorrect");
             }
 
-            SettingScene settingScene = new SettingScene(window, connector);
-            Scene scene = new Scene(settingScene);
-            window.setScene(scene);
 
         });
 
