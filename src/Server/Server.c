@@ -11,14 +11,12 @@ int main(int argc, char **argv) {
 if (argc < 2) {
         printf("podaj numer portu jako parametr\n");
         return 1;
-    }
-
+ }
 
  char bufor[1024];
  int gniazdo, gniazdo2;
  struct sockaddr_in adr, nadawca;
  socklen_t dl = sizeof(struct sockaddr_in);
-
 
  gniazdo = socket(PF_INET, SOCK_STREAM, 0);
  adr.sin_family = AF_INET;
@@ -34,6 +32,7 @@ if (argc < 2) {
  return 1;
  }
  printf("Czekam na polaczenie ...\n");
+ while(1){
  while ((gniazdo2 = accept(gniazdo,
  (struct sockaddr*) &nadawca,
  &dl)) > 0
@@ -45,6 +44,7 @@ if (argc < 2) {
  inet_ntoa(nadawca.sin_addr),
  bufor);
  close(gniazdo2);
+ }
  }
  close(gniazdo);
  return 0;
